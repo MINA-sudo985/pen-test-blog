@@ -233,7 +233,7 @@ curl -X POST https://httpbin.org/post \
 重点看 `json` 字段：httpbin 能把它解析成 JSON，说明 **`Content-Type: application/json` 生效了**，
 服务端正确识别成了 JSON body 而不是普通字符串。少了这个头，很多框架会直接把 body 当表单解析，报参数为空。
 
-![](E:\实验报告撰写\curl\images\03-post-json.png)
+![](images/03-post-json.png)
 
 ### 场景 4：表单提交与文件上传
 
@@ -250,7 +250,7 @@ curl -d "username=zhangsan&role=admin" https://httpbin.org/post
   }
 ```
 
-![](E:\实验报告撰写\curl\images\04-post-form.png)
+![](images/04-post-form.png)
 
 **上传文件**要用 `-F`，curl 会自动切成 `multipart/form-data` 并生成 boundary：
 
@@ -285,7 +285,7 @@ curl -d "username=zhangsan&role=admin" https://httpbin.org/post
 `@` 是关键：`file=@test.txt` 表示**读取文件内容**；写成 `file=test.txt` 就只是传了个字符串 `test.txt`。
 即：`-F`其实只是`mutipart`里的普通文本字段，值是字符串，是因为有了@才变成文件字段
 
-![](E:\实验报告撰写\curl\images\04-upload.png)
+![](images/04-upload.png)
 
 ### 场景 5：认证
 
@@ -341,13 +341,13 @@ curl -c cookies.txt -b cookies.txt \
   "https://httpbin.org/cookies/set?sessionid=abc123&uid=1001"
 ```
 
-![](E:\实验报告撰写\curl\images\05-cookies-1.png)
+![](images/05-cookies-1.png)
 
 > 注意：这里/cookies/set端点种完Cookie后会自动302重定向到/cookies，由于curl默认不跟随重定向，所以这里返回的是`Redirecting...`HTML引导页，如果想跟随重定向，可以加上参数`-L`
 
 尝试读取`Cookie`文件
 
-![](E:\实验报告撰写\curl\images\05-cookie-2.png)
+![](images/05-cookie-2.png)
 
 ```bash
 # 第二步：带 Cookie 登录
@@ -378,7 +378,7 @@ curl -L -O https://httpbin.org/image/png
 curl -L -C - -o big.bin https://example.com/big.bin
 ```
 
-![](E:\实验报告撰写\curl\images\06-download.png)
+![](images/06-download.png)
 
 `-C -` 背后的原理是 `Range` 请求头。可以手动指定区间验证：
 
@@ -434,7 +434,7 @@ TLS握手: 0.659203s
 
 换成 `https://www.baidu.com` 再跑一次，通常能看到完全不同的分布——这就是定位"到底慢在哪一段"的方法。
 
-![](E:\实验报告撰写\curl\images\07-timing.png)
+![](images/07-timing.png)
 
 ### 5.2 用 `-v` 看清每一步
 
@@ -473,7 +473,7 @@ curl -v https://httpbin.org/status/204 2>&1 | head -24
 * TLSv1.3 (IN), TLS handshake, Finished (20):
 ```
 
-![](E:\实验报告撰写\curl\images\08-verbose.png)
+![](images/08-verbose.png)
 
 **超时**——服务端故意延迟 5 秒，客户端只等 2 秒：
 
@@ -486,7 +486,7 @@ curl: (28) Operation timed out after 2001 milliseconds with 0 bytes received
 状态码=000
 ```
 
-![](E:\实验报告撰写\curl\images\09-timeout.png)
+![](images/09-timeout.png)
 
 这里 000 表示没有拿到状态码；28是退出码，表示`Operation timeout`。
 
@@ -550,7 +550,7 @@ https://httpbin.org/status/500           500      1.991238   FAIL
 - `-w` 用空格分隔两个指标，再用 shell 的 `${out%% *}` / `${out##* }` 拆开；
 - `2xx/3xx` 判 OK，`4xx/5xx` 判 FAIL，符合一般健康检查的口径。
 
-![](E:\实验报告撰写\curl\images\10-check-sh.png)
+![](images/10-check-sh.png)
 
 ---
 
